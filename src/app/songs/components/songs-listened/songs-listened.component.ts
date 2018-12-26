@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
+import { filter, map } from 'rxjs/operators';
+
 import { SongsService } from '../../services/songs.service';
 
 import { Store } from '../../../store';
@@ -27,7 +29,11 @@ export class SongsListenedComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.listened$ = this.store.select('playlist');
+    this.listened$ = this.store.select('playlist')
+    .pipe(
+        filter(Boolean),
+        map(playlist => playlist.filter(track => track.favourite))
+    );
   }
 
 }
