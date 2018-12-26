@@ -10,6 +10,7 @@ export class AppComponent {
   title = 'RX';
   todos$ = this.store.select<any[]>('todos');
   constructor( private store: Store) {
+    console.log(this.store);
     this.store.set('todos', [{ id: 1, name: 'Eat dinner' }, { id: 2, name: 'Do washing' }]);
   }
 }
