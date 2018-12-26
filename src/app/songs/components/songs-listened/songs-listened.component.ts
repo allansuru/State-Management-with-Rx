@@ -32,7 +32,7 @@ export class SongsListenedComponent implements OnInit {
     this.listened$ = this.store.select('playlist')
     .pipe(
         filter(Boolean),
-        map(playlist => playlist.filter(track => track.favourite))
+        map(playlist => playlist.filter(track => track.listened))
     );
   }
 
