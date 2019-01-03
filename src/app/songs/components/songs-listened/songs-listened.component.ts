@@ -12,10 +12,10 @@ import { Store } from '../../../store';
   selector: 'songs-listened',
   template: `
     <div class="songs">
-      <div *ngFor="let item of listened$ | async">
-        {{ item.artist }}
-        {{ item.track }}
-      </div>
+      <songs-list
+        [list]="listened$ | async">
+        Played
+      </songs-list>
     </div>
   `
 })

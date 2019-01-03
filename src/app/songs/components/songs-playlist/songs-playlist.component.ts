@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription, Observable } from 'rxjs';
 
+import { map, tap } from 'rxjs/operators';
+
 import { SongsService } from '../../services/songs.service';
 
 import { Store } from '../../../store';
@@ -10,10 +12,10 @@ import { Store } from '../../../store';
   selector: 'songs-playlist',
   template: `
     <div class="songs">
-      <div *ngFor="let item of playlist$ | async">
-        {{ item.artist }}
-        {{ item.track }}
-      </div>
+      <songs-list
+        [list]="playlist$ | async">
+        Playlist
+      </songs-list>
     </div>
   `
 })
