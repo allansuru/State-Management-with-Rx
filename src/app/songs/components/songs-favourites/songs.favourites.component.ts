@@ -11,12 +11,13 @@ import { Store } from '../../../store';
 @Component({
   selector: 'songs-favourites',
   template: `
-    <div class="songs">
-      <songs-list
-        [list]="favourites$ | async">
-        Favourites
-      </songs-list>
-    </div>
+  <div class="songs">
+  <songs-list
+    [list]="favourites$ | async"
+    (toggle)="onToggle($event)">
+    Favourites
+  </songs-list>
+</div>
   `
 })
 export class SongsFavouritesComponent implements OnInit {
@@ -34,6 +35,10 @@ export class SongsFavouritesComponent implements OnInit {
         filter(Boolean),
         map(playlist => playlist.filter(track => track.favourite))
     );
+  }
+
+  onToggle(event) {
+    this.songsService.toggle(event);
   }
 
 }

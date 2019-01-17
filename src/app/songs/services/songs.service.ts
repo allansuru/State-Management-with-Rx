@@ -22,6 +22,7 @@ export class SongsService {
     .get('http://localhost:3000/playlist')
     .pipe(
         tap(next => {
+          debugger
             console.log('NEXT: ', next);
             this.store.set('playlist', next);
         })

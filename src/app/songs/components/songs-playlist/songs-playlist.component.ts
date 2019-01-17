@@ -13,7 +13,8 @@ import { Store } from '../../../store';
   template: `
     <div class="songs">
       <songs-list
-        [list]="playlist$ | async">
+        [list]="playlist$ | async"
+        (toggle)="onToggle($event)">
         Playlist
       </songs-list>
     </div>
@@ -30,8 +31,13 @@ export class SongsPlaylistComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    debugger
     this.playlist$ = this.store.select('playlist');
     this.subscription = this.songsService.getPlaylist$.subscribe();
+  }
+
+  onToggle(event) {
+    this.songsService.toggle(event);
   }
 
   ngOnDestroy() {

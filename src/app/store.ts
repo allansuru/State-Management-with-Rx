@@ -30,6 +30,7 @@ export class Store {
 
     // tslint:disable-next-line:no-shadowed-variable
     set(name: string, state: any) {
+        debugger
         this.subject.next({
             ...this.value, [name]: state
         });
