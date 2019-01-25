@@ -40,7 +40,6 @@ export class SongsService {
         map(res => res)
       )
       .subscribe((track: Song) => {
-        debugger
         const value = this.store.value.playlist;
 
         const playlist = value.map((song: Song) => {
