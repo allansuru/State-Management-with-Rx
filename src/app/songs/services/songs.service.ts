@@ -22,7 +22,6 @@ export class SongsService {
     .get('http://localhost:3000/playlist')
     .pipe(
         tap(next => {
-          debugger
             console.log('NEXT: ', next);
             this.store.set('playlist', next);
         })
@@ -35,7 +34,24 @@ export class SongsService {
   ) {}
 
   toggle(event: any) {
-    console.log(event);
+    this.http
+      .put(`http://localhost:3000/playlist/${event.track.id}`, event.track)
+      .pipe(
+        map(res => res)
+      )
+      .subscribe((track: Song) => {
+        debugger
+        const value = this.store.value.playlist;
+
+        const playlist = value.map((song: Song) => {
+          if (event.track.id === song.id) {
+            return { ...song, ...event.track };
+          } else {
+            return song;
+          }
+        });
+        this.store.set('playlist', playlist);
+      });
   }
 
 }
